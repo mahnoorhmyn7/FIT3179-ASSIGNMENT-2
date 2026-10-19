@@ -1,0 +1,54 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #f5f2e9;
+  color: #26382d;
+  font-family: Arial, sans-serif;
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+main {
+  width: min(100% - 40px, 1100px);
+  margin: 0 auto;
+  padding: 64px 0;
+}
+
+header {
+  padding-bottom: 40px;
+  border-bottom: 2px solid #c9d2c3;
+}
+
+.eyebrow {
+  color: #49634e;
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+h1 {
+  margin: 12px 0 24px;
+  font-family: Georgia, serif;
+  font-size: clamp(36px, 6vw, 64px);
+  line-height: 1.1;
+}
+
+h2 {
+  font-size: 28px;
+}
+
+p {
+  max-width: 65ch;
+}
+
+.introduction {
+  font-size: 21px;
+}
+
+section {
+  padding-top: 24px;
+}
