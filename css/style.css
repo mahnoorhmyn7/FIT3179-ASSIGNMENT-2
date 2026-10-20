@@ -1,54 +1,141 @@
+:root {
+  --forest: #183a30;
+  --leaf: #55765b;
+  --clay: #bd6848;
+  --ink: #24332d;
+  --muted: #68736c;
+  --paper: #f5f3ec;
+  --white: #fffefa;
+  --rule: #d8ddd4;
+}
+
 * {
   box-sizing: border-box;
 }
 
 body {
   margin: 0;
-  background: #f5f2e9;
-  color: #26382d;
-  font-family: Arial, sans-serif;
-  font-size: 18px;
-  line-height: 1.6;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.65;
 }
 
-main {
-  width: min(100% - 40px, 1100px);
-  margin: 0 auto;
-  padding: 64px 0;
+.hero {
+  background: var(--forest);
+  color: var(--white);
+  padding: 64px 24px 72px;
 }
 
-header {
-  padding-bottom: 40px;
-  border-bottom: 2px solid #c9d2c3;
+.hero > * {
+  max-width: 980px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.eyebrow {
-  color: #49634e;
-  font-size: 14px;
-  font-weight: bold;
-  letter-spacing: 2px;
+.eyebrow,
+.section-number {
+  color: var(--clay);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
+.hero .eyebrow {
+  color: #e9b697;
+}
+
+h1,
+h2 {
+  font-family: Georgia, "Times New Roman", serif;
+  line-height: 1.15;
+}
+
 h1 {
-  margin: 12px 0 24px;
-  font-family: Georgia, serif;
-  font-size: clamp(36px, 6vw, 64px);
-  line-height: 1.1;
+  max-width: 760px;
+  margin-top: 20px;
+  margin-bottom: 16px;
+  font-size: clamp(2.8rem, 7vw, 5.5rem);
+  letter-spacing: -0.04em;
+}
+
+.subtitle {
+  max-width: 680px;
+  color: #e2e9e2;
+  font-size: clamp(1.05rem, 2vw, 1.3rem);
+}
+
+main {
+  width: min(100% - 40px, 980px);
+  margin: 0 auto;
+}
+
+.story-section {
+  padding: 54px 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.section-number {
+  margin-bottom: 12px;
 }
 
 h2 {
-  font-size: 28px;
+  margin: 0 0 14px;
+  color: var(--forest);
+  font-size: clamp(1.8rem, 4vw, 2.7rem);
 }
 
-p {
-  max-width: 65ch;
+.story-section > p:not(.section-number) {
+  max-width: 700px;
+  color: var(--muted);
 }
 
-.introduction {
-  font-size: 21px;
+.chart-slot {
+  min-height: 180px;
+  margin-top: 26px;
+  padding: 20px;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  background: var(--white);
 }
 
-section {
-  padding-top: 24px;
+.chart-slot:empty::before {
+  content: "The visualisation will appear here";
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.sources {
+  padding-bottom: 64px;
+}
+
+footer {
+  padding: 24px 20px;
+  background: var(--forest);
+  color: #e2e9e2;
+  text-align: center;
+  font-size: 0.85rem;
+}
+
+footer p {
+  margin: 0;
+}
+
+@media (max-width: 600px) {
+  .hero {
+    padding: 48px 20px 56px;
+  }
+
+  main {
+    width: min(100% - 32px, 980px);
+  }
+
+  .story-section {
+    padding: 40px 0;
+  }
+
+  .chart-slot {
+    padding: 12px;
+  }
 }

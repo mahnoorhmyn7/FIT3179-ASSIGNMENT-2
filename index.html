@@ -1,32 +1,70 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>Beyond the Enclosure</title>
-
-  <link rel="stylesheet" href="css/style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Beyond the Exhibit | Zoo Conservation in Australia</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-  <main>
-    <header>
-      <p class="eyebrow">Australian zoos and conservation</p>
-      <h1>Beyond the Enclosure</h1>
-      <p class="introduction">
-        Which Australian animals need help, and how do zoos
-        contribute to wildlife conservation beyond displaying them to the public?
-      </p>
-    </header>
+  <header class="hero">
+    <p class="eyebrow">Australian wildlife · Conservation evidence</p>
+    <h1>Beyond the Exhibit</h1>
+    <p class="subtitle">
+      What can threatened-species records and zoo-sourced conservation
+      studies tell us about helping wildlife beyond the zoo?
+    </p>
+  </header>
 
-    <section>
-      <h2>Our story starts here</h2>
+  <main>
+    <section class="story-section">
+      <p class="section-number">01 · The conservation challenge</p>
+      <h2>Where are threatened species recorded?</h2>
       <p>
-        We will explore Australia's listed animals, where they occur,
-        and their connections to documented zoo conservation programs.
+        Introduce the state-list data and explain that it records listed
+        species by state, not the number of individual animals.
+      </p>
+      <div id="vis-state-map" class="chart-slot"></div>
+    </section>
+
+    <section class="story-section">
+      <p class="section-number">02 · From zoo to wild</p>
+      <h2>Which species appear in translocation studies?</h2>
+      <p>
+        Show how the zoo-sourced translocation studies connect to the
+        Australian threatened-species list.
+      </p>
+      <div id="vis-translocations" class="chart-slot"></div>
+    </section>
+
+    <section class="story-section">
+      <p class="section-number">03 · After release</p>
+      <h2>What did the studies report?</h2>
+      <p>
+        Explore reported outcomes and follow-up, with a note that these are
+        historical study records and author-reported results.
+      </p>
+      <div id="vis-outcomes" class="chart-slot"></div>
+    </section>
+
+    <section class="story-section sources">
+      <p class="section-number">04 · About this evidence</p>
+      <h2>Sources and limits</h2>
+      <p>
+        List both dataset sources, their dates, and what they can and cannot
+        tell us.
       </p>
     </section>
   </main>
+
+  <footer>
+    <p>Created by Mahnoor · FIT3179 Data Visualisation 2 · 2026</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/vega@6.4.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@6.5.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@7.3.0"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>
