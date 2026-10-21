@@ -1,0 +1,50 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Threatened taxa listed in each Australian state or territory. This shows listed taxa, not individual animals.",
+  "width": "container",
+  "height": 430,
+  "autosize": {
+    "type": "fit",
+    "contains": "padding",
+    "resize": true
+  },
+  "data": {
+    "values": []
+  },
+  "projection": {
+    "type": "conicEqualArea",
+    "center": [134, -25]
+  },
+  "mark": {
+    "type": "geoshape",
+    "stroke": "#fffefa",
+    "strokeWidth": 1.5
+  },
+  "encoding": {
+    "color": {
+      "field": "properties.listed_taxa",
+      "type": "quantitative",
+      "title": "Listed taxa",
+      "scale": {
+        "scheme": "greens"
+      }
+    },
+    "tooltip": [
+      {
+        "field": "properties.shapeName",
+        "type": "nominal",
+        "title": "State or territory"
+      },
+      {
+        "field": "properties.listed_taxa",
+        "type": "quantitative",
+        "title": "Listed taxa"
+      }
+    ]
+  },
+  "config": {
+    "view": {
+      "stroke": null
+    }
+  }
+}
