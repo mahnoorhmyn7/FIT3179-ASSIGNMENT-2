@@ -31,7 +31,7 @@
     },
     "tooltip": [
       {
-        "field": "properties.shapeName",
+        "field": "properties.STATE_NAME_2026",
         "type": "nominal",
         "title": "State or territory"
       },
