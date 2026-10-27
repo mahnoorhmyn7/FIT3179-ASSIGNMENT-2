@@ -1,0 +1,182 @@
+
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Schematic Australian tile grid map showing recorded 2020 wildlife recovery grants by state and territory.",
+  "width": 760,
+  "height": 440,
+  "background": "#fffefa",
+  "padding": 20,
+  "data": {
+    "values": []
+  },
+  "encoding": {
+    "x": {
+      "field": "col",
+      "type": "ordinal",
+      "sort": "ascending",
+      "scale": {
+        "domain": [0, 1, 2, 3],
+        "paddingInner": 0.1,
+        "paddingOuter": 0.05
+      },
+      "axis": null
+    },
+    "y": {
+      "field": "row",
+      "type": "ordinal",
+      "sort": "ascending",
+      "scale": {
+        "domain": [1, 2, 3, 4],
+        "paddingInner": 0.1,
+        "paddingOuter": 0.05
+      },
+      "axis": null
+    }
+  },
+  "layer": [
+    {
+      "transform": [
+        {
+          "filter": "datum.has_grant === false"
+        }
+      ],
+      "mark": {
+        "type": "rect",
+        "cornerRadius": 8,
+        "color": "#e7e9e2",
+        "stroke": "#d0d8cd",
+        "strokeWidth": 1.5
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.has_grant === true"
+        }
+      ],
+      "mark": {
+        "type": "rect",
+        "cornerRadius": 8,
+        "stroke": "#ffffff",
+        "strokeWidth": 2
+      },
+      "encoding": {
+        "color": {
+          "field": "total_funding",
+          "type": "quantitative",
+          "title": "Recorded funding (A$)",
+          "scale": {
+            "zero": true,
+            "range": [
+              "#e0ecdf",
+              "#9abb9b",
+              "#55765b",
+              "#183a30"
+            ]
+          },
+          "legend": {
+            "orient": "bottom",
+            "direction": "horizontal",
+            "gradientLength": 270,
+            "gradientThickness": 15,
+            "format": "~s",
+            "titleFont": "Arial",
+            "labelFont": "Arial",
+            "titleFontSize": 14,
+            "labelFontSize": 13,
+            "titleColor": "#183a30",
+            "labelColor": "#24332d"
+          }
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "font": "Arial",
+        "fontSize": 22,
+        "fontWeight": "bold",
+        "baseline": "middle",
+        "dy": -15
+      },
+      "encoding": {
+        "text": {
+          "field": "code",
+          "type": "nominal"
+        },
+        "color": {
+          "condition": {
+            "test": "datum.text_color === '#ffffff'",
+            "value": "#ffffff"
+          },
+          "value": "#183a30"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "font": "Arial",
+        "fontSize": 14,
+        "baseline": "middle",
+        "dy": 18
+      },
+      "encoding": {
+        "text": {
+          "field": "funding_label",
+          "type": "nominal"
+        },
+        "color": {
+          "condition": {
+            "test": "datum.text_color === '#ffffff'",
+            "value": "#ffffff"
+          },
+          "value": "#183a30"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "rect",
+        "opacity": 0,
+        "tooltip": true
+      },
+      "encoding": {
+        "tooltip": [
+          {
+            "field": "state",
+            "type": "nominal",
+            "title": "State / territory"
+          },
+          {
+            "field": "status_label",
+            "type": "nominal",
+            "title": "Funding status"
+          },
+          {
+            "field": "funding_label",
+            "type": "nominal",
+            "title": "Recorded funding"
+          },
+          {
+            "field": "projects",
+            "type": "quantitative",
+            "title": "Grant records",
+            "format": ",d"
+          }
+        ]
+      }
+    }
+  ],
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFont": "Arial",
+      "titleFont": "Arial",
+      "labelFontSize": 13,
+      "titleFontSize": 14
+    }
+  }
+}

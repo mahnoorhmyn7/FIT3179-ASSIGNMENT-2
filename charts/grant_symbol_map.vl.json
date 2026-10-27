@@ -1,0 +1,96 @@
+
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Proportional symbol map of geographically assigned Australian Government wildlife conservation grants in 2020.",
+  "width": "container",
+  "height": 450,
+  "autosize": {
+    "type": "fit",
+    "contains": "padding",
+    "resize": true
+  },
+  "projection": {
+    "type": "conicEqualArea",
+    "parallels": [-18, -36],
+    "rotate": [-134, 0, 0]
+  },
+  "layer": [
+    {
+      "data": {
+        "values": []
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#dce5d9",
+        "stroke": "#ffffff",
+        "strokeWidth": 1.5
+      }
+    },
+    {
+      "data": {
+        "values": []
+      },
+      "mark": {
+        "type": "circle",
+        "color": "#bd6848",
+        "opacity": 0.85,
+        "stroke": "#ffffff",
+        "strokeWidth": 1.5
+      },
+      "encoding": {
+        "longitude": {
+          "field": "longitude",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "latitude",
+          "type": "quantitative"
+        },
+        "size": {
+          "field": "total_funding",
+          "type": "quantitative",
+          "title": "Funding (AUD)",
+          "scale": {
+            "type": "linear",
+            "zero": true,
+            "range": [0, 3500]
+          },
+          "legend": {
+            "orient": "bottom",
+            "format": "~s",
+            "symbolFillColor": "#bd6848",
+            "symbolStrokeColor": "#fffefa",
+            "titleFontSize": 13,
+            "labelFontSize": 12
+          }
+        },
+        "tooltip": [
+          {
+            "field": "state",
+            "type": "nominal",
+            "title": "State"
+          },
+          {
+            "field": "total_funding",
+            "type": "quantitative",
+            "title": "Grant funding (AUD)",
+            "format": ",.0f"
+          },
+          {
+            "field": "projects",
+            "type": "quantitative",
+            "title": "Funded projects",
+            "format": "d"
+          }
+        ]
+      }
+    }
+  ],
+  "config": {
+    "background": "#fffefa",
+    "view": {
+      "stroke": null
+    },
+    "font": "Arial"
+  }
+}

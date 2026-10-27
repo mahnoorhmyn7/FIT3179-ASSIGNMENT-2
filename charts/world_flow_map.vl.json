@@ -1,0 +1,138 @@
+
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "World regional connections between named zoo institutions and release regions in published conservation studies. Not verified animal movement routes.",
+  "width": 850,
+  "height": 480,
+  "background": "#fffefa",
+  "projection": {
+    "type": "equalEarth"
+  },
+  "datasets": {
+    "flows": [],
+    "nodes": []
+  },
+  "layer": [
+    {
+      "data": {
+        "url": "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json",
+        "format": {
+          "type": "topojson",
+          "feature": "countries"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#e9eee8",
+        "stroke": "#b9c9bb",
+        "strokeWidth": 0.6
+      }
+    },
+    {
+      "data": {
+        "name": "flows"
+      },
+      "mark": {
+        "type": "geoshape",
+        "filled": false,
+        "stroke": "#bd6848",
+        "opacity": 0.85,
+        "strokeCap": "round"
+      },
+      "encoding": {
+        "shape": {
+          "field": "geometry",
+          "type": "geojson"
+        },
+        "strokeWidth": {
+          "field": "count",
+          "type": "quantitative",
+          "scale": {
+            "domainMin": 0,
+            "range": [2, 7]
+          },
+          "legend": {
+            "title": "Published study records",
+            "orient": "bottom"
+          }
+        },
+        "tooltip": [
+          {
+            "field": "origin",
+            "type": "nominal",
+            "title": "Zoo region"
+          },
+          {
+            "field": "destination",
+            "type": "nominal",
+            "title": "Release region"
+          },
+          {
+            "field": "count",
+            "type": "quantitative",
+            "title": "Study records"
+          }
+        ]
+      }
+    },
+    {
+      "data": {
+        "name": "nodes"
+      },
+      "mark": {
+        "type": "circle",
+        "filled": true,
+        "stroke": "#ffffff",
+        "strokeWidth": 1.5,
+        "size": 170
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "lat",
+          "type": "quantitative"
+        },
+        "color": {
+          "field": "role",
+          "type": "nominal",
+          "scale": {
+            "domain": ["Zoo region", "Release region"],
+            "range": ["#183a30", "#bd6848"]
+          },
+          "legend": {
+            "title": "Regional marker",
+            "orient": "bottom"
+          }
+        },
+        "tooltip": [
+          {
+            "field": "region",
+            "type": "nominal",
+            "title": "Region"
+          },
+          {
+            "field": "role",
+            "type": "nominal",
+            "title": "Role"
+          }
+        ]
+      }
+    }
+  ],
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "legend": {
+      "labelFont": "Arial",
+      "titleFont": "Arial",
+      "labelFontSize": 13,
+      "titleFontSize": 14,
+      "labelColor": "#24332d",
+      "titleColor": "#183a30"
+    }
+  }
+}

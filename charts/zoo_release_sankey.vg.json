@@ -1,0 +1,54 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v6.json",
+  "description": "Sankey of Australian zoo-sourced release study records by animal group and reported outcome. Data injected by main.js.",
+  "width": 880,
+  "height": 1000,
+  "padding": {"left": 12, "right": 12, "top": 8, "bottom": 8},
+  "autosize": "none",
+  "background": "#fffefa",
+  "data": [
+    {"name": "flows", "values": []},
+    {"name": "nodes", "values": []}
+  ],
+  "marks": [
+    {
+      "type": "path",
+      "from": {"data": "flows"},
+      "encode": {
+        "enter": {
+          "path": {"field": "path"},
+          "fill": {"field": "colour"},
+          "fillOpacity": {"value": 0.40},
+          "tooltip": {"signal": "{'Animal group': datum.group, 'Reported outcome': datum.outcome, 'Study records': datum.count}"}
+        },
+        "hover": {"fillOpacity": {"value": 0.74}}
+      }
+    },
+    {
+      "type": "rect",
+      "from": {"data": "nodes"},
+      "encode": {
+        "enter": {
+          "x": {"field": "x"}, "y": {"field": "y"},
+          "width": {"field": "width"}, "height": {"field": "height"},
+          "cornerRadius": {"value": 2},
+          "fill": {"field": "colour"},
+          "tooltip": {"signal": "{'Category': datum.label, 'Study records': datum.count}"}
+        }
+      }
+    },
+    {
+      "type": "text",
+      "from": {"data": "nodes"},
+      "encode": {
+        "enter": {
+          "x": {"field": "labelX"}, "y": {"field": "labelY"},
+          "text": {"field": "label"},
+          "align": {"field": "align"}, "baseline": {"value": "middle"},
+          "font": {"value": "Arial"}, "fontSize": {"value": 13},
+          "fontWeight": {"value": "bold"}, "fill": {"value": "#183a30"}
+        }
+      }
+    }
+  ]
+}

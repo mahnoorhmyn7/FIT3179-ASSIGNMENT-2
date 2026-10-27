@@ -1,0 +1,28 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "State-level dot-density depiction. Dots are generated schematically within state boundaries and do not show wildlife locations.",
+  "width": "600",
+  "height": 430,
+  "autosize": {"type": "fit", "contains": "padding", "resize": true},
+  "projection": {"type": "conicEqualArea", "parallels": [-18, -36], "rotate": [-134, 0, 0]},
+  "layer": [
+    {
+      "data": {"values": []},
+      "mark": {"type": "geoshape", "fill": "#e7eee6", "stroke": "#fffefa", "strokeWidth": 1.5}
+    },
+    {
+      "data": {"values": []},
+      "mark": {"type": "circle", "size": 29, "filled": true, "color": "#bd6848", "opacity": 0.84},
+      "encoding": {
+        "longitude": {"field": "longitude", "type": "quantitative"},
+        "latitude": {"field": "latitude", "type": "quantitative"},
+        "tooltip": [
+          {"field": "state", "type": "nominal", "title": "State / territory"},
+          {"field": "listed_taxa", "type": "quantitative", "title": "Listed taxa", "format": ",d"},
+          {"field": "dot_count", "type": "quantitative", "title": "Dots shown", "format": ",d"}
+        ]
+      }
+    }
+  ],
+  "config": {"background": "#fffefa", "view": {"stroke": null}, "font": "Arial"}
+}

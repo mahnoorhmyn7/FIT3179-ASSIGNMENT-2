@@ -1,0 +1,258 @@
+
+{
+  "$schema": "https://vega.github.io/schema/vega/v6.json",
+  "description": "Treemap of Australian nationally listed threatened animal taxa by taxonomic class.",
+  "width": 800,
+  "height": 420,
+  "padding": 5,
+  "autosize": "none",
+  "background": "#fffefa",
+  "data": [
+    {
+      "name": "animals",
+      "url": "data/threatened_animals.csv",
+      "format": {
+        "type": "csv"
+      },
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum.Class != null && datum.Class !== ''"
+        }
+      ]
+    },
+    {
+      "name": "groups",
+      "source": "animals",
+      "transform": [
+        {
+          "type": "aggregate",
+          "groupby": [
+            "Class"
+          ],
+          "ops": [
+            "count"
+          ],
+          "as": [
+            "taxa_count"
+          ]
+        },
+        {
+          "type": "formula",
+          "as": "id",
+          "expr": "datum.Class"
+        },
+        {
+          "type": "formula",
+          "as": "parent",
+          "expr": "'All animals'"
+        }
+      ]
+    },
+    {
+      "name": "allTaxaNode",
+      "values": [
+        {
+          "id": "All animals",
+          "parent": null,
+          "taxa_count": 0
+        }
+      ]
+    },
+    {
+      "name": "tree",
+      "source": [
+        "allTaxaNode",
+        "groups"
+      ],
+      "transform": [
+        {
+          "type": "stratify",
+          "key": "id",
+          "parentKey": "parent"
+        },
+        {
+          "type": "treemap",
+          "field": "taxa_count",
+          "sort": {
+            "field": "value",
+            "order": "descending"
+          },
+          "method": "squarify",
+          "ratio": 1.3,
+          "size": [
+            {
+              "signal": "width"
+            },
+            {
+              "signal": "height"
+            }
+          ],
+          "paddingInner": 3,
+          "round": true
+        }
+      ]
+    },
+    {
+      "name": "leaves",
+      "source": "tree",
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum.depth === 1"
+        }
+      ]
+    },
+    {
+      "name": "largeLabels",
+      "source": "leaves",
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum.x1 - datum.x0 > 105 && datum.y1 - datum.y0 > 45"
+        }
+      ]
+    },
+    {
+      "name": "countLabels",
+      "source": "leaves",
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum.x1 - datum.x0 > 105 && datum.y1 - datum.y0 > 75"
+        }
+      ]
+    }
+  ],
+  "scales": [
+    {
+      "name": "colour",
+      "type": "ordinal",
+      "domain": {
+        "data": "groups",
+        "field": "Class"
+      },
+      "range": [
+        "#183a30",
+        "#365d49",
+        "#55765b",
+        "#76967c",
+        "#91ab92",
+        "#b1c6af",
+        "#bd6848",
+        "#cf906b",
+        "#d9b18a",
+        "#a6afa3"
+      ]
+    }
+  ],
+  "marks": [
+    {
+      "type": "rect",
+      "from": {
+        "data": "leaves"
+      },
+      "encode": {
+        "enter": {
+          "fill": {
+            "scale": "colour",
+            "field": "id"
+          },
+          "stroke": {
+            "value": "#fffefa"
+          },
+          "strokeWidth": {
+            "value": 2
+          },
+          "tooltip": {
+            "signal": "{'Animal class': datum.id, 'Listed taxa': datum.taxa_count}"
+          }
+        },
+        "update": {
+          "x": {
+            "field": "x0"
+          },
+          "y": {
+            "field": "y0"
+          },
+          "x2": {
+            "field": "x1"
+          },
+          "y2": {
+            "field": "y1"
+          },
+          "fillOpacity": {
+            "value": 1
+          }
+        },
+        "hover": {
+          "fillOpacity": {
+            "value": 0.78
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "from": {
+        "data": "largeLabels"
+      },
+      "encode": {
+        "enter": {
+          "x": {
+            "signal": "datum.x0 + 10"
+          },
+          "y": {
+            "signal": "datum.y0 + 20"
+          },
+          "text": {
+            "field": "id"
+          },
+          "font": {
+            "value": "Arial"
+          },
+          "fontSize": {
+            "value": 12
+          },
+          "fontWeight": {
+            "value": "bold"
+          },
+          "fill": {
+            "value": "#ffffff"
+          },
+          "limit": {
+            "signal": "datum.x1 - datum.x0 - 16"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "from": {
+        "data": "countLabels"
+      },
+      "encode": {
+        "enter": {
+          "x": {
+            "signal": "datum.x0 + 10"
+          },
+          "y": {
+            "signal": "datum.y0 + 40"
+          },
+          "text": {
+            "signal": "format(datum.taxa_count, ',') + ' taxa'"
+          },
+          "font": {
+            "value": "Arial"
+          },
+          "fontSize": {
+            "value": 18
+          },
+          "fill": {
+            "value": "#ffffff"
+          }
+        }
+      }
+    }
+  ]
+}

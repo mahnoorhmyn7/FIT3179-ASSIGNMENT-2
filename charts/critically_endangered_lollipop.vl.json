@@ -1,0 +1,137 @@
+
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Lollipop chart ranking animal classes by the number of nationally listed critically endangered taxa.",
+  "width": "container",
+  "height": 360,
+  "autosize": {
+    "type": "fit",
+    "contains": "padding",
+    "resize": true
+  },
+  "data": {
+    "values": []
+  },
+  "transform": [
+    {
+      "calculate": "0",
+      "as": "baseline"
+    }
+  ],
+  "encoding": {
+    "y": {
+      "field": "animal_class",
+      "type": "nominal",
+      "sort": {
+        "field": "count",
+        "order": "descending"
+      },
+      "title": null,
+      "axis": {
+        "labelFontSize": 12,
+        "labelLimit": 180,
+        "labelPadding": 10,
+        "ticks": false,
+        "domain": false
+      }
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "rule",
+        "strokeWidth": 3,
+        "color": "#9bad9c"
+      },
+      "encoding": {
+        "x": {
+          "field": "baseline",
+          "type": "quantitative",
+          "scale": {
+            "zero": true
+          },
+          "title": "Critically endangered taxa"
+        },
+        "x2": {
+          "field": "count"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "circle",
+        "size": 170,
+        "color": "#bd6848",
+        "stroke": "#fffefa",
+        "strokeWidth": 1.5
+      },
+      "encoding": {
+        "x": {
+          "field": "count",
+          "type": "quantitative",
+          "scale": {
+            "zero": true
+          }
+        },
+        "tooltip": [
+          {
+            "field": "animal_class",
+            "type": "nominal",
+            "title": "Animal class"
+          },
+          {
+            "field": "count",
+            "type": "quantitative",
+            "title": "Critically endangered taxa"
+          },
+          {
+            "field": "total",
+            "type": "quantitative",
+            "title": "Total listed taxa"
+          },
+          {
+            "field": "share",
+            "type": "quantitative",
+            "title": "Share within animal class",
+            "format": ".1%"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 12,
+        "font": "Arial",
+        "fontSize": 12,
+        "fontWeight": "bold",
+        "color": "#183a30"
+      },
+      "encoding": {
+        "x": {
+          "field": "count",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "count",
+          "type": "quantitative",
+          "format": "d"
+        }
+      }
+    }
+  ],
+  "config": {
+    "background": "#fffefa",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFont": "Arial",
+      "titleFont": "Arial",
+      "labelColor": "#24332d",
+      "titleColor": "#24332d",
+      "gridColor": "#e7e9e3"
+    }
+  }
+}

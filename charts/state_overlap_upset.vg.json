@@ -1,0 +1,304 @@
+
+{
+  "$schema": "https://vega.github.io/schema/vega/v6.json",
+  "description": "UpSet plot showing the 12 most frequent exact state-occurrence combinations among nationally listed threatened taxa.",
+  "width": 820,
+  "height": 435,
+  "padding": {
+    "left": 10,
+    "right": 15,
+    "top": 12,
+    "bottom": 15
+  },
+  "autosize": "pad",
+  "background": "#fffefa",
+  "data": [
+    {
+      "name": "combinations",
+      "values": []
+    },
+    {
+      "name": "matrix",
+      "values": []
+    },
+    {
+      "name": "connections",
+      "values": []
+    },
+    {
+      "name": "states",
+      "values": []
+    },
+    {
+      "name": "activeMatrix",
+      "source": "matrix",
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum.active"
+        }
+      ]
+    }
+  ],
+  "scales": [
+    {
+      "name": "columnX",
+      "type": "band",
+      "domain": {
+        "data": "combinations",
+        "field": "id"
+      },
+      "range": [
+        155,
+        {
+          "signal": "width - 15"
+        }
+      ],
+      "paddingInner": 0.22,
+      "paddingOuter": 0.08
+    },
+    {
+      "name": "barY",
+      "type": "linear",
+      "domain": {
+        "data": "combinations",
+        "field": "count"
+      },
+      "domainMin": 0,
+      "nice": true,
+      "zero": true,
+      "range": [200, 45]
+    },
+    {
+      "name": "matrixY",
+      "type": "band",
+      "domain": [
+        "WA",
+        "NT",
+        "QLD",
+        "SA",
+        "NSW",
+        "ACT",
+        "VIC",
+        "TAS"
+      ],
+      "range": [247, 423],
+      "paddingInner": 0.12
+    }
+  ],
+  "axes": [
+    {
+      "scale": "barY",
+      "orient": "left",
+      "offset": 155,
+      "title": "Listed taxa",
+      "tickCount": 5,
+      "grid": true,
+      "gridScale": "columnX",
+      "labelFont": "Arial",
+      "titleFont": "Arial",
+      "labelFontSize": 11,
+      "titleFontSize": 12,
+      "labelColor": "#52645a",
+      "titleColor": "#183a30",
+      "gridColor": "#e7ece5",
+      "domain": false,
+      "tickColor": "#d8ddd4"
+    }
+  ],
+  "marks": [
+    {
+      "type": "text",
+      "encode": {
+        "enter": {
+          "x": {"value": 155},
+          "y": {"value": 16},
+          "text": {
+            "value": "MOST COMMON EXACT STATE COMBINATIONS"
+          },
+          "font": {"value": "Arial"},
+          "fontSize": {"value": 12},
+          "fontWeight": {"value": "bold"},
+          "fill": {"value": "#183a30"}
+        }
+      }
+    },
+    {
+      "type": "rect",
+      "from": {
+        "data": "combinations"
+      },
+      "encode": {
+        "enter": {
+          "fill": {"value": "#55765b"},
+          "tooltip": {
+            "signal": "{'Exact combination':datum.label, 'Listed taxa':datum.count}"
+          }
+        },
+        "update": {
+          "x": {
+            "scale": "columnX",
+            "field": "id"
+          },
+          "width": {
+            "scale": "columnX",
+            "band": 1
+          },
+          "y": {
+            "scale": "barY",
+            "field": "count"
+          },
+          "y2": {
+            "scale": "barY",
+            "value": 0
+          }
+        },
+        "hover": {
+          "fill": {"value": "#bd6848"}
+        }
+      }
+    },
+    {
+      "type": "text",
+      "from": {
+        "data": "combinations"
+      },
+      "encode": {
+        "enter": {
+          "align": {"value": "center"},
+          "baseline": {"value": "bottom"},
+          "font": {"value": "Arial"},
+          "fontSize": {"value": 12},
+          "fontWeight": {"value": "bold"},
+          "fill": {"value": "#183a30"}
+        },
+        "update": {
+          "x": {
+            "signal": "scale('columnX', datum.id) + bandwidth('columnX') / 2"
+          },
+          "y": {
+            "signal": "scale('barY', datum.count) - 5"
+          },
+          "text": {
+            "field": "count"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "encode": {
+        "enter": {
+          "x": {"value": 5},
+          "y": {"value": 230},
+          "text": {
+            "value": "STATE / TERRITORY"
+          },
+          "font": {"value": "Arial"},
+          "fontSize": {"value": 11},
+          "fontWeight": {"value": "bold"},
+          "fill": {"value": "#183a30"}
+        }
+      }
+    },
+    {
+      "type": "text",
+      "from": {
+        "data": "states"
+      },
+      "encode": {
+        "enter": {
+          "x": {"value": 135},
+          "align": {"value": "right"},
+          "baseline": {"value": "middle"},
+          "fill": {"value": "#24332d"},
+          "font": {"value": "Arial"},
+          "fontSize": {"value": 12}
+        },
+        "update": {
+          "y": {
+            "signal": "scale('matrixY', datum.code) + bandwidth('matrixY') / 2"
+          },
+          "text": {
+            "field": "code"
+          }
+        }
+      }
+    },
+    {
+      "type": "symbol",
+      "from": {
+        "data": "matrix"
+      },
+      "encode": {
+        "enter": {
+          "shape": {"value": "circle"},
+          "tooltip": {
+            "signal": "{'Exact combination':datum.label, 'Listed taxa':datum.count, 'State':datum.state, 'Included':datum.active ? 'Yes' : 'No'}"
+          }
+        },
+        "update": {
+          "x": {
+            "signal": "scale('columnX', datum.id) + bandwidth('columnX') / 2"
+          },
+          "y": {
+            "signal": "scale('matrixY', datum.state) + bandwidth('matrixY') / 2"
+          },
+          "size": {"value": 110},
+          "fill": {
+            "signal": "datum.active ? '#183a30' : '#e3e9e2'"
+          }
+        }
+      }
+    },
+    {
+      "type": "rule",
+      "from": {
+        "data": "connections"
+      },
+      "encode": {
+        "enter": {
+          "stroke": {"value": "#bd6848"},
+          "strokeWidth": {"value": 2.5}
+        },
+        "update": {
+          "x": {
+            "signal": "scale('columnX', datum.id) + bandwidth('columnX') / 2"
+          },
+          "y": {
+            "signal": "scale('matrixY', datum.first) + bandwidth('matrixY') / 2"
+          },
+          "y2": {
+            "signal": "scale('matrixY', datum.last) + bandwidth('matrixY') / 2"
+          }
+        }
+      }
+    },
+    {
+      "type": "symbol",
+      "from": {
+        "data": "activeMatrix"
+      },
+      "encode": {
+        "enter": {
+          "shape": {"value": "circle"},
+          "fill": {"value": "#183a30"},
+          "stroke": {"value": "#fffefa"},
+          "strokeWidth": {"value": 1},
+          "tooltip": {
+            "signal": "{'Exact combination':datum.label, 'Listed taxa':datum.count, 'Included state':datum.state}"
+          }
+        },
+        "update": {
+          "x": {
+            "signal": "scale('columnX', datum.id) + bandwidth('columnX') / 2"
+          },
+          "y": {
+            "signal": "scale('matrixY', datum.state) + bandwidth('matrixY') / 2"
+          },
+          "size": {"value": 150}
+        }
+      }
+    }
+  ]
+}

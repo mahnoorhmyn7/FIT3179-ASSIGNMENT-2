@@ -1,0 +1,91 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "A 100-tile waffle chart showing percentages of nationally listed threatened taxa by status.",
+  "width": "container",
+  "height": 355,
+  "autosize": {
+    "type": "fit",
+    "contains": "padding",
+    "resize": true
+  },
+  "data": {"values": []},
+  "mark": {
+    "type": "rect",
+    "stroke": "#fffefa",
+    "strokeWidth": 2,
+    "cornerRadius": 2
+  },
+  "encoding": {
+    "x": {
+      "field": "column",
+      "type": "ordinal",
+      "axis": null,
+      "sort": "ascending",
+      "scale": {"paddingInner": 0.04, "paddingOuter": 0.02}
+    },
+    "y": {
+      "field": "row",
+      "type": "ordinal",
+      "axis": null,
+      "sort": "descending",
+      "scale": {"paddingInner": 0.04, "paddingOuter": 0.02}
+    },
+    "color": {
+      "field": "status",
+      "type": "nominal",
+      "title": "National status",
+      "scale": {
+        "domain": [
+          "Critically Endangered",
+          "Endangered",
+          "Vulnerable",
+          "Extinct",
+          "Extinct in the wild",
+          "Conservation Dependent"
+        ],
+        "range": [
+          "#b94f39",
+          "#cf8558",
+          "#6e9276",
+          "#404d49",
+          "#9279a4",
+          "#c3ae79"
+        ]
+      },
+      "legend": {
+        "orient": "bottom",
+        "direction": "horizontal",
+        "columns": 3,
+        "labelFontSize": 12,
+        "symbolType": "square",
+        "titleFontSize": 12
+      }
+    },
+    "tooltip": [
+      {
+        "field": "status",
+        "type": "nominal",
+        "title": "Threatened status"
+      },
+      {
+        "field": "count",
+        "type": "quantitative",
+        "title": "Listed taxa"
+      },
+      {
+        "field": "percentage",
+        "type": "quantitative",
+        "title": "Share",
+        "format": ".1f"
+      }
+    ]
+  },
+  "config": {
+    "background": null,
+    "view": {"stroke": null},
+    "legend": {
+      "labelFont": "Arial",
+      "titleFont": "Arial"
+    }
+  }
+}

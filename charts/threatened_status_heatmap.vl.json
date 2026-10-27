@@ -1,0 +1,102 @@
+
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Number of Australian nationally listed threatened taxa by animal class and threat status.",
+  "width": "760",
+  "height": 440,
+  "data": {
+    "url": "data/threatened_animals.csv",
+    "format": {
+      "type": "csv"
+    }
+  },
+  "transform": [
+    {
+      "aggregate": [
+        {
+          "op": "count",
+          "as": "taxa_count"
+        }
+      ],
+      "groupby": [
+        "Class",
+        "Threatened status"
+      ]
+    }
+  ],
+  "mark": {
+    "type": "rect",
+    "stroke": "#fffefa",
+    "strokeWidth": 1
+  },
+  "encoding": {
+    "x": {
+      "field": "Threatened status",
+      "type": "nominal",
+      "title": "National conservation status",
+      "sort": [
+        "Extinct",
+        "Extinct in the wild",
+        "Critically Endangered",
+        "Endangered",
+        "Vulnerable",
+        "Conservation Dependent"
+      ],
+      "axis": {
+        "labelAngle": -35,
+        "labelFontSize": 12,
+        "labelLimit": 160
+      }
+    },
+    "y": {
+      "field": "Class",
+      "type": "nominal",
+      "title": "Animal class",
+      "sort": "-x",
+      "axis": {
+        "labelFontSize": 12,
+        "labelLimit": 180
+      }
+    },
+    "color": {
+      "field": "taxa_count",
+      "type": "quantitative",
+      "title": "Listed taxa",
+      "scale": {
+        "range": [
+          "#f0f4eb",
+          "#c1d4bf",
+          "#749b7c",
+          "#183a30"
+        ]
+      },
+      "legend": {
+        "orient": "bottom"
+      }
+    },
+    "tooltip": [
+      {
+        "field": "Class",
+        "type": "nominal",
+        "title": "Animal class"
+      },
+      {
+        "field": "Threatened status",
+        "type": "nominal",
+        "title": "Conservation status"
+      },
+      {
+        "field": "taxa_count",
+        "type": "quantitative",
+        "title": "Listed taxa"
+      }
+    ]
+  },
+  "config": {
+    "background": "#fffefa",
+    "view": {
+      "stroke": null
+    },
+    "font": "Arial"
+  }
+}

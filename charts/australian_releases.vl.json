@@ -1,0 +1,79 @@
+
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Animal groups represented in published Australian zoo-sourced wildlife translocation study records.",
+  "width": "760",
+  "height": 310,
+  "data": {
+    "url": "data/zoo_wildlife_releases.csv",
+    "format": {
+      "type": "csv"
+    }
+  },
+  "transform": [
+    {
+      "filter": "datum['transl.country'] === 'Australia'"
+    },
+    {
+      "aggregate": [
+        {
+          "op": "count",
+          "as": "study_count"
+        }
+      ],
+      "groupby": ["group"]
+    }
+  ],
+  "mark": {
+    "type": "bar",
+    "color": "#55765b",
+    "cornerRadiusEnd": 3
+  },
+  "encoding": {
+    "x": {
+      "field": "study_count",
+      "type": "quantitative",
+      "title": "Number of study records",
+      "scale": {
+        "zero": true
+      },
+      "axis": {
+        "tickMinStep": 1,
+        "labelFontSize": 12,
+        "titleFontSize": 13,
+        "grid": false,
+        "gridColor": "#e8ece6"
+      }
+    },
+    "y": {
+      "field": "group",
+      "type": "nominal",
+      "title": null,
+      "sort": "-x",
+      "axis": {
+        "labelFontSize": 13,
+        "labelLimit": 180,
+        "labelPadding": 8
+      }
+    },
+    "tooltip": [
+      {
+        "field": "group",
+        "type": "nominal",
+        "title": "Animal group"
+      },
+      {
+        "field": "study_count",
+        "type": "quantitative",
+        "title": "Study records"
+      }
+    ]
+  },
+  "config": {
+    "background": "#fffefa",
+    "view": {
+      "stroke": null
+    },
+    "font": "Arial"
+  }
+}

@@ -1,141 +1,608 @@
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Libre+Baskerville:wght@400;700&display=swap');
+
+/* ==========================================
+   COLOURS AND TYPOGRAPHY
+   ========================================== */
+
 :root {
-  --forest: #183a30;
-  --leaf: #55765b;
-  --clay: #bd6848;
-  --ink: #24332d;
-  --muted: #68736c;
-  --paper: #f5f3ec;
-  --white: #fffefa;
-  --rule: #d8ddd4;
+  --forest: #183A30;
+  --deep-forest: #102A22;
+  --sage: #64876B;
+  --sage-light: #E8EEE6;
+  --terracotta: #BD6848;
+  --ivory: #F7F5EF;
+  --paper: #FFFFFF;
+  --ink: #27352F;
+  --muted: #56665D;
+  --border: #DAE1D8;
+
+  --heading-font: 'Libre Baskerville', Georgia, serif;
+  --body-font: 'DM Sans', Arial, sans-serif;
+
+  --page-width: 1360px;
+  --reading-width: 790px;
 }
 
-* {
+/* ==========================================
+   RESET
+   ========================================== */
+
+*,
+*::before,
+*::after {
   box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   margin: 0;
-  background: var(--paper);
+  background: var(--ivory);
   color: var(--ink);
-  font-family: Arial, Helvetica, sans-serif;
-  line-height: 1.65;
-}
-
-.hero {
-  background: var(--forest);
-  color: var(--white);
-  padding: 64px 24px 72px;
-}
-
-.hero > * {
-  max-width: 980px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.eyebrow,
-.section-number {
-  color: var(--clay);
-  font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-
-.hero .eyebrow {
-  color: #e9b697;
+  font: 400 17px/1.7 var(--body-font);
+  -webkit-font-smoothing: antialiased;
 }
 
 h1,
-h2 {
-  font-family: Georgia, "Times New Roman", serif;
-  line-height: 1.15;
+h2,
+h3,
+p {
+  margin-top: 0;
 }
 
-h1 {
-  max-width: 760px;
-  margin-top: 20px;
-  margin-bottom: 16px;
-  font-size: clamp(2.8rem, 7vw, 5.5rem);
-  letter-spacing: -0.04em;
-}
-
-.subtitle {
-  max-width: 680px;
-  color: #e2e9e2;
-  font-size: clamp(1.05rem, 2vw, 1.3rem);
-}
-
-main {
-  width: min(100% - 40px, 980px);
-  margin: 0 auto;
-}
-
-.story-section {
-  padding: 54px 0;
-  border-bottom: 1px solid var(--rule);
-}
-
-.section-number {
-  margin-bottom: 12px;
-}
-
-h2 {
-  margin: 0 0 14px;
+a {
   color: var(--forest);
-  font-size: clamp(1.8rem, 4vw, 2.7rem);
+  text-decoration-color: var(--terracotta);
+  text-underline-offset: 4px;
 }
 
-.story-section > p:not(.section-number) {
-  max-width: 700px;
-  color: var(--muted);
+a:hover {
+  color: var(--terracotta);
 }
 
-.chart-slot {
-  min-height: 180px;
-  margin-top: 26px;
-  padding: 20px;
-  border: 1px solid var(--rule);
-  border-radius: 8px;
-  background: var(--white);
+img {
+  max-width: 100%;
 }
 
-.chart-slot:empty::before {
-  content: "The visualisation will appear here";
-  color: var(--muted);
-  font-size: 0.9rem;
+/* ==========================================
+   PAGE CONTAINER
+   ========================================== */
+
+.page-container,
+main,
+.site-main {
+  width: min(calc(100% - 88px), var(--page-width));
+  margin-inline: auto;
 }
 
-.sources {
-  padding-bottom: 64px;
+main,
+.site-main {
+  padding-bottom: 35px;
 }
 
-footer {
-  padding: 24px 20px;
-  background: var(--forest);
-  color: #e2e9e2;
-  text-align: center;
-  font-size: 0.85rem;
+/* ==========================================
+   HERO SECTION
+   ========================================== */
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding: 92px 0 98px;
+  background: var(--deep-forest);
+  color: white;
 }
 
-footer p {
+.hero::after {
+  content: "";
+  position: absolute;
+  right: -140px;
+  bottom: -260px;
+  width: 580px;
+  height: 580px;
+  border: 1px solid #ffffff20;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.hero .page-container {
+  position: relative;
+  z-index: 1;
+}
+
+.eyebrow {
+  font: 700 12px/1.5 var(--body-font);
+  letter-spacing: 0.16em;
+  color: #DCA184;
+  margin-bottom: 25px;
+}
+
+.hero h1 {
+  font: 700 clamp(54px, 6vw, 86px)/1.14 var(--heading-font);
+  letter-spacing: -0.045em;
+  max-width: 1000px;
+  margin-bottom: 25px;
+  color: white;
+}
+
+.hero-subtitle {
+  max-width: 810px;
+  font-size: 21px;
+  line-height: 1.6;
+  color: #F1F3EF;
+  margin-bottom: 16px;
+}
+
+.hero-description {
+  max-width: 760px;
+  color: #CEDBD1;
+  line-height: 1.75;
+  margin-bottom: 29px;
+}
+
+.hero-rule {
+  width: 76px;
+  height: 3px;
+  background: var(--terracotta);
+  margin-bottom: 18px;
+}
+
+.hero-caption {
+  font-size: 14px;
+  color: #BFCFC4;
   margin: 0;
 }
 
-@media (max-width: 600px) {
-  .hero {
-    padding: 48px 20px 56px;
+/* ==========================================
+   STORY SECTIONS
+   ========================================== */
+
+.story-section {
+  padding: 72px 0 65px;
+}
+
+.story-section + .story-section {
+  border-top: 1px solid var(--border);
+}
+
+.section-number {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--terracotta);
+  margin-bottom: 14px;
+}
+
+.story-section > h2 {
+  font: 700 clamp(32px, 3.4vw, 44px)/1.35 var(--heading-font);
+  letter-spacing: -0.035em;
+  color: var(--forest);
+  max-width: 1050px;
+  margin-bottom: 18px;
+}
+
+.section-intro {
+  max-width: var(--reading-width);
+  font-size: 18px;
+  line-height: 1.8;
+  color: var(--muted);
+  margin-bottom: 38px;
+}
+
+/* ==========================================
+   CHART CARDS
+   ========================================== */
+
+.chart-card {
+  margin: 0 0 49px;
+  min-width: 0;
+}
+
+.chart-card:last-child {
+  margin-bottom: 0;
+}
+
+.chart-heading {
+  margin-bottom: 16px;
+}
+
+.chart-number {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--sage);
+  margin-bottom: 9px;
+}
+
+.chart-heading h3 {
+  font: 700 clamp(22px, 2.1vw, 28px)/1.4 var(--heading-font);
+  letter-spacing: -0.02em;
+  color: var(--forest);
+  max-width: 1000px;
+  margin: 0 0 11px;
+}
+
+.chart-heading > p:not(.chart-number) {
+  max-width: 870px;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.7;
+  margin-bottom: 0;
+}
+
+/* ==========================================
+   COMPACT CHART CONTAINERS
+   ========================================== */
+
+.chart-slot {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  height: auto;
+  min-height: 0;
+
+  /* Reduced padding to minimise white space */
+  padding: 12px 16px;
+
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: 0 4px 15px #183a3008;
+  overflow: visible;
+}
+
+.chart-slot .vega-embed {
+  display: block;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.chart-slot svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+
+.chart-slot canvas {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ==========================================
+   KEY FINDING ANNOTATIONS
+   ========================================== */
+
+.chart-insight {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+
+  padding: 15px 18px;
+  margin: 13px 0 0;
+
+  background: var(--sage-light);
+  border-left: 4px solid var(--terracotta);
+  border-radius: 0 8px 8px 0;
+}
+
+.insight-label {
+  flex: none;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  line-height: 1.8;
+  color: var(--terracotta);
+  white-space: nowrap;
+  margin-top: 2px;
+}
+
+.chart-insight strong {
+  display: block;
+  font-size: 15px;
+  line-height: 1.4;
+  color: var(--forest);
+  margin-bottom: 4px;
+}
+
+.chart-insight p {
+  font-size: 14px;
+  line-height: 1.62;
+  color: #3F5448;
+  margin: 0;
+  max-width: 950px;
+}
+
+.chart-note {
+  max-width: 1050px;
+  margin: 13px 0 0;
+  padding-left: 12px;
+  border-left: 2px solid #C5D5C7;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+/* ==========================================
+   TWO-COLUMN CHART LAYOUT
+   FIGURES 04 AND 05
+   ========================================== */
+
+.chart-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 25px;
+  align-items: start;
+}
+
+.chart-grid .chart-card {
+  margin: 0;
+  min-width: 0;
+}
+
+.chart-grid .chart-heading {
+  min-height: 172px;
+}
+
+.chart-grid .chart-heading h3 {
+  font-size: 22px;
+}
+
+.chart-grid .chart-heading > p:not(.chart-number) {
+  font-size: 15px;
+}
+
+.chart-grid .chart-slot {
+  padding: 9px 10px;
+  overflow: hidden;
+}
+
+/* ==========================================
+   UPSET PLOT LEGEND
+   ========================================== */
+
+.upset-legend {
+  margin: 13px 0 11px;
+  padding: 15px 19px;
+  background: var(--sage-light);
+  border: 1px solid #D4DED2;
+  border-radius: 9px;
+}
+
+.upset-legend-title {
+  display: block;
+  color: var(--forest);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+  margin-bottom: 11px;
+}
+
+.upset-legend-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+}
+
+.upset-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.upset-legend-bar {
+  width: 11px;
+  height: 20px;
+  background: #55765B;
+  border-radius: 2px;
+}
+
+.upset-legend-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.upset-legend-dot.active {
+  background: var(--forest);
+}
+
+.upset-legend-dot.inactive {
+  background: #E3E9E2;
+  border: 1px solid #C5D0C4;
+}
+
+.upset-legend-line {
+  width: 3px;
+  height: 18px;
+  background: var(--terracotta);
+  border-radius: 2px;
+  margin: 0 5px;
+}
+
+/* ==========================================
+   DOT-DENSITY MAP LEGEND
+   ========================================== */
+
+.dot-map-key {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin: 13px 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--forest);
+}
+
+.dot-map-key-symbol {
+  flex: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--terracotta);
+}
+
+/* ==========================================
+   METHODOLOGY
+   ========================================== */
+
+.methodology {
+  padding-bottom: 85px;
+}
+
+.methodology > p {
+  max-width: var(--reading-width);
+  color: var(--muted);
+  line-height: 1.8;
+  margin-bottom: 19px;
+}
+
+.methodology > h3 {
+  font: 700 24px/1.4 var(--heading-font);
+  color: var(--forest);
+  margin: 30px 0 14px;
+}
+
+/* ==========================================
+   FOOTER
+   ========================================== */
+
+footer {
+  padding: 35px 20px;
+  background: var(--deep-forest);
+  color: #E9EFEA;
+  text-align: center;
+}
+
+footer p {
+  font-size: 13px;
+  line-height: 1.6;
+  margin: 0 0 6px;
+}
+
+footer p:last-child {
+  margin-bottom: 0;
+}
+
+/* ==========================================
+   RESPONSIVE DESIGN
+   ========================================== */
+
+@media (max-width: 1199px) {
+  .chart-grid {
+    grid-template-columns: 1fr;
+    gap: 44px;
   }
 
-  main {
-    width: min(100% - 32px, 980px);
+  .chart-grid .chart-heading {
+    min-height: 0;
+  }
+
+  .chart-grid .chart-slot {
+    padding: 12px 16px;
+  }
+}
+
+@media (max-width: 900px) {
+  .page-container,
+  main,
+  .site-main {
+    width: calc(100% - 48px);
+  }
+
+  .hero {
+    padding: 70px 0;
   }
 
   .story-section {
-    padding: 40px 0;
+    padding: 58px 0;
   }
 
-  .chart-slot {
-    padding: 12px;
+  .section-intro {
+    margin-bottom: 30px;
+  }
+
+  .chart-card {
+    margin-bottom: 40px;
+  }
+}
+
+@media (max-width: 600px) {
+  .page-container,
+  main,
+  .site-main {
+    width: calc(100% - 28px);
+  }
+
+  body {
+    font-size: 16px;
+  }
+
+  .hero {
+    padding: 52px 0;
+  }
+
+  .hero h1 {
+    font-size: 46px;
+  }
+
+  .hero-subtitle {
+    font-size: 17px;
+  }
+
+  .hero-description {
+    font-size: 15px;
+  }
+
+  .story-section {
+    padding: 43px 0;
+  }
+
+  .story-section > h2 {
+    font-size: 29px;
+  }
+
+  .section-intro {
+    font-size: 16px;
+  }
+
+  .chart-heading h3 {
+    font-size: 21px;
+  }
+
+  .chart-heading > p:not(.chart-number) {
+    font-size: 15px;
+  }
+
+  .chart-slot,
+  .chart-grid .chart-slot {
+    padding: 8px;
+    overflow-x: auto;
+  }
+
+  .chart-insight {
+    display: block;
+    padding: 13px;
+  }
+
+  .insight-label {
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  .chart-insight p {
+    font-size: 13px;
+  }
+
+  .chart-grid {
+    gap: 35px;
+  }
+
+  .methodology > h3 {
+    font-size: 21px;
   }
 }

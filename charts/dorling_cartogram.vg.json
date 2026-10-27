@@ -1,0 +1,307 @@
+
+{
+  "$schema": "https://vega.github.io/schema/vega/v6.json",
+  "description": "Collision-aware Dorling-style cartogram showing listed threatened taxa across Australian states and territories.",
+  "width": 880,
+  "height": 360,
+  "padding": {
+    "left": 10,
+    "right": 10,
+    "top": 8,
+    "bottom": 12
+  },
+  "autosize": "none",
+  "background": "#fffefa",
+  "signals": [
+    {
+      "name": "circleAreaPerTaxon",
+      "value": 24
+    }
+  ],
+  "data": [
+    {
+      "name": "states",
+      "values": [],
+      "transform": [
+        {
+          "type": "formula",
+          "as": "xfocus",
+          "expr": "width * (0.18 + datum.anchor_x * 0.64)"
+        },
+        {
+          "type": "formula",
+          "as": "yfocus",
+          "expr": "height * (0.18 + datum.anchor_y * 0.62)"
+        },
+        {
+          "type": "formula",
+          "as": "circleArea",
+          "expr": "datum.listed_taxa * circleAreaPerTaxon"
+        },
+        {
+          "type": "formula",
+          "as": "radius",
+          "expr": "sqrt(datum.circleArea / PI)"
+        },
+        {
+          "type": "formula",
+          "as": "collisionRadius",
+          "expr": "datum.radius + 5"
+        },
+        {
+          "type": "formula",
+          "as": "x",
+          "expr": "datum.xfocus"
+        },
+        {
+          "type": "formula",
+          "as": "y",
+          "expr": "datum.yfocus"
+        },
+        {
+          "type": "force",
+          "static": true,
+          "iterations": 500,
+          "forces": [
+            {
+              "force": "x",
+              "x": "xfocus",
+              "strength": 0.22
+            },
+            {
+              "force": "y",
+              "y": "yfocus",
+              "strength": 0.22
+            },
+            {
+              "force": "collide",
+              "radius": {
+                "field": "collisionRadius"
+              },
+              "strength": 1,
+              "iterations": 10
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "legendSizes",
+      "values": [
+        {
+          "value": 50,
+          "x": 80
+        },
+        {
+          "value": 100,
+          "x": 200
+        },
+        {
+          "value": 200,
+          "x": 340
+        },
+        {
+          "value": 300,
+          "x": 510
+        }
+      ],
+      "transform": [
+        {
+          "type": "formula",
+          "as": "circleArea",
+          "expr": "datum.value * circleAreaPerTaxon"
+        },
+        {
+          "type": "formula",
+          "as": "radius",
+          "expr": "sqrt(datum.circleArea / PI)"
+        }
+      ]
+    }
+  ],
+  "marks": [
+    {
+      "type": "symbol",
+      "from": {
+        "data": "states"
+      },
+      "encode": {
+        "enter": {
+          "shape": {
+            "value": "circle"
+          },
+          "fill": {
+            "value": "#55765b"
+          },
+          "stroke": {
+            "value": "#183a30"
+          },
+          "strokeWidth": {
+            "value": 1.5
+          },
+          "tooltip": {
+            "signal": "{'State or territory': datum.state, 'Listed taxa': datum.listed_taxa}"
+          }
+        },
+        "update": {
+          "x": {
+            "field": "x"
+          },
+          "y": {
+            "field": "y"
+          },
+          "size": {
+            "field": "circleArea"
+          },
+          "fillOpacity": {
+            "value": 0.95
+          }
+        },
+        "hover": {
+          "fillOpacity": {
+            "value": 0.75
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "from": {
+        "data": "states"
+      },
+      "encode": {
+        "enter": {
+          "font": {
+            "value": "Arial"
+          },
+          "fontWeight": {
+            "value": "bold"
+          },
+          "fontSize": {
+            "value": 14
+          },
+          "fill": {
+            "value": "#ffffff"
+          },
+          "align": {
+            "value": "center"
+          },
+          "baseline": {
+            "value": "middle"
+          }
+        },
+        "update": {
+          "x": {
+            "field": "x"
+          },
+          "y": {
+            "field": "y"
+          },
+          "text": {
+            "field": "abbr"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "encode": {
+        "enter": {
+          "x": {
+            "value": 20
+          },
+          "y": {
+            "signal": "height + 18"
+          },
+          "text": {
+            "value": "CIRCLE AREA • LISTED TAXA"
+          },
+          "font": {
+            "value": "Arial"
+          },
+          "fontSize": {
+            "value": 12
+          },
+          "fontWeight": {
+            "value": "bold"
+          },
+          "fill": {
+            "value": "#183a30"
+          }
+        }
+      }
+    },
+    {
+      "type": "symbol",
+      "from": {
+        "data": "legendSizes"
+      },
+      "encode": {
+        "enter": {
+          "shape": {
+            "value": "circle"
+          },
+          "fill": {
+            "value": "#55765b"
+          },
+          "fillOpacity": {
+            "value": 0.95
+          },
+          "stroke": {
+            "value": "#183a30"
+          },
+          "strokeWidth": {
+            "value": 1
+          }
+        },
+        "update": {
+          "x": {
+            "field": "x"
+          },
+          "y": {
+            "signal": "height + 72"
+          },
+          "size": {
+            "field": "circleArea"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "from": {
+        "data": "legendSizes"
+      },
+      "encode": {
+        "enter": {
+          "font": {
+            "value": "Arial"
+          },
+          "fontSize": {
+            "value": 11
+          },
+          "fill": {
+            "value": "#24332d"
+          },
+          "align": {
+            "value": "left"
+          },
+          "baseline": {
+            "value": "middle"
+          }
+        },
+        "update": {
+          "x": {
+            "signal": "datum.x + datum.radius + 9"
+          },
+          "y": {
+            "signal": "height + 72"
+          },
+          "text": {
+            "field": "value"
+          }
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,162 @@
+
+{
+  "$schema": "https://vega.github.io/schema/vega/v6.json",
+  "description": "Non-contiguous area cartogram of global zoo-associated release study records. Country shape area is proportional to study count; fill represents share reporting Success.",
+  "width": 980,
+  "height": 510,
+  "padding": {
+    "left": 15,
+    "right": 20,
+    "top": 22,
+    "bottom": 25
+  },
+  "autosize": "pad",
+  "background": "#fffefa",
+  "data": [
+    {
+      "name": "background",
+      "values": []
+    },
+    {
+      "name": "countries",
+      "values": []
+    },
+    {
+      "name": "labels",
+      "values": []
+    }
+  ],
+  "scales": [
+    {
+      "name": "successColour",
+      "type": "linear",
+      "domain": [0, 1],
+      "range": [
+        "#d8e8d5",
+        "#183a30"
+      ],
+      "zero": false
+    }
+  ],
+  "legends": [
+    {
+      "fill": "successColour",
+      "orient": "bottom",
+      "direction": "horizontal",
+      "title": "Studies reporting success (%)",
+      "format": ".0%",
+      "gradientLength": 300,
+      "gradientThickness": 13,
+      "labelFont": "Arial",
+      "titleFont": "Arial",
+      "labelFontSize": 13,
+      "titleFontSize": 14,
+      "titleColor": "#183a30",
+      "labelColor": "#24332d"
+    }
+  ],
+  "marks": [
+    {
+      "type": "path",
+      "from": {
+        "data": "background"
+      },
+      "encode": {
+        "update": {
+          "path": {
+            "field": "path"
+          },
+          "fill": {
+            "value": "#f0f2ed"
+          },
+          "stroke": {
+            "value": "#cdd7cb"
+          },
+          "strokeWidth": {
+            "value": 0.7
+          }
+        }
+      }
+    },
+    {
+      "type": "path",
+      "from": {
+        "data": "countries"
+      },
+      "encode": {
+        "update": {
+          "path": {
+            "field": "path"
+          },
+          "fill": {
+            "scale": "successColour",
+            "field": "successRate"
+          },
+          "stroke": {
+            "value": "#ffffff"
+          },
+          "strokeWidth": {
+            "value": 1.3
+          },
+          "tooltip": {
+            "signal": "{'Release country':datum.country,'Study records':datum.count,'Success outcomes':datum.success,'Success proportion':datum.successLabel}"
+          }
+        },
+        "hover": {
+          "stroke": {
+            "value": "#bd6848"
+          },
+          "strokeWidth": {
+            "value": 2.5
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "from": {
+        "data": "labels"
+      },
+      "encode": {
+        "update": {
+          "x": {
+            "field": "x"
+          },
+          "y": {
+            "field": "y"
+          },
+          "text": {
+            "signal": "datum.label + ' (' + datum.count + ')'"
+          },
+          "font": {
+            "value": "Arial"
+          },
+          "fontWeight": {
+            "value": "bold"
+          },
+          "fontSize": {
+            "value": 13
+          },
+          "align": {
+            "value": "center"
+          },
+          "baseline": {
+            "value": "middle"
+          },
+          "fill": {
+            "value": "#24332d"
+          },
+          "stroke": {
+            "value": "#fffefa"
+          },
+          "strokeWidth": {
+            "value": 2.5
+          },
+          "strokeJoin": {
+            "value": "round"
+          }
+        }
+      }
+    }
+  ]
+}

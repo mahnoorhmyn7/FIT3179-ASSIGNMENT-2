@@ -1,77 +1,315 @@
+
 <!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Beyond the Exhibit | Zoo Conservation in Australia</title>
-
+  <title>Beyond the Exhibit | Australian Zoo Conservation</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
-
 <body>
   <header class="hero">
-    <p class="eyebrow">Australian wildlife · Conservation evidence</p>
-    <h1>Beyond the Exhibit</h1>
-    <p class="subtitle">
-      Follow the evidence from Australia’s threatened-species lists to zoo-sourced releases—and what researchers reported afterward.
-    </p>
+    <div class="page-container">
+      <p class="eyebrow">AUSTRALIAN WILDLIFE • CONSERVATION EVIDENCE</p>
+      <h1>Beyond the Exhibit</h1>
+      <p class="hero-subtitle">How Australian zoos contribute to wildlife conservation beyond the animals we see behind their enclosures.</p>
+      <p class="hero-description">Explore Australia's threatened wildlife, published research into zoo-sourced animal releases, and government funding for conservation recovery.</p>
+      <div class="hero-rule"></div>
+      <p class="hero-caption">An evidence-based visual story about endangered species, conservation action and recovery.</p>
+    </div>
   </header>
 
   <main>
-    <section class="story-section">
-      <p class="section-number">01 · The conservation challenge</p>
-      <h2>Where are threatened species recorded?</h2>
-      <p>
-        The dataset lists 700 threatened taxa across Australian states and territories. A taxon can appear on more than one state list. The map shows listed taxa, not the number of individual animals in the wild.
-      </p>
-      <div id="vis-state-map" class="chart-slot"></div>
+    <!-- SECTION 01 -->
+    <section class="story-section" id="challenge">
+      <p class="section-number">01 / THE CONSERVATION CHALLENGE</p>
+      <h2>Australia's wildlife is under pressure</h2>
+      <p class="section-intro">Australia's threatened-species records identify animals facing different levels of extinction risk. Understanding their distribution helps explain why conservation programs matter.</p>
+
+      <article class="chart-card">
+        <div class="chart-heading">
+          <p class="chart-number">FIGURE 01 • CHOROPLETH MAP</p>
+          <h3>Where are threatened animals listed?</h3>
+          <p>Explore the number of listed taxa across Australian states and territories. A taxon can appear in multiple states.</p>
+        </div>
+        <div id="vis-state-map" class="chart-slot"></div>
+        <div class="chart-insight">
+          <span class="insight-label">KEY FINDING</span>
+          <div>
+            <strong>State differences are substantial</strong>
+            <p>NSW has 287 threatened-taxa occurrence records, compared with 52 in the ACT. These totals describe recorded occurrences, not population size.</p>
+          </div>
+        </div>
+        <p class="chart-note">These are state occurrence flags among 700 nationally listed taxa, not wild animal population counts or independently verified state threat lists.</p>
+      </article>
+
+      <article class="chart-card">
+        <div class="chart-heading">
+          <p class="chart-number">FIGURE 02 • HEATMAP</p>
+          <h3>Which animal groups face the greatest threats?</h3>
+          <p>Compare the distribution of national conservation categories across animal groups.</p>
+        </div>
+        <div id="vis-status-heatmap" class="chart-slot"></div>
+        <div class="chart-insight">
+          <span class="insight-label">KEY FINDING</span>
+          <div>
+            <strong>Extinction risk spans many animal groups</strong>
+            <p>Of the 700 listed taxa, 255 are Endangered, 221 Vulnerable and 149 Critically Endangered. Look across the heatmap to see how these categories vary by class.</p>
+          </div>
+        </div>
+        <p class="chart-note">Source: Australian Government threatened-species data, extracted 28 August 2026.</p>
+      </article>
+
+      <article class="chart-card">
+        <div class="chart-heading">
+          <p class="chart-number">FIGURE 03 • TREEMAP</p>
+          <h3>Which animal groups make up Australia's threatened wildlife?</h3>
+          <p>Each rectangle represents an animal class. Its area shows the number of nationally listed threatened taxa belonging to that class. Larger rectangles represent more listed taxa.</p>
+        </div>
+        <div id="vis-treemap" class="chart-slot"></div>
+        <div class="chart-insight">
+          <span class="insight-label">KEY FINDING</span>
+          <div>
+            <strong>Birds and mammals dominate the list</strong>
+            <p>Birds (Aves) account for 186 listed taxa and mammals (Mammalia) for 152. Treemap area represents listed taxa, not abundance in the wild.</p>
+          </div>
+        </div>
+        <p class="chart-note">Source: Australian Government threatened-species records. Animal classes are scientific taxonomic categories. Small groups may be visible only through tooltips.</p>
+      </article>
     </section>
 
-    <section class="story-section">
-      <p class="section-number">02 · From zoo to wild</p>
-      <h2>Which species appear in translocation studies?</h2>
-      <p>
-        A 2026 review brings together 117 global study records of conservation translocations using zoo-sourced animals. 
-        Of these, 27 concern Australia. Thirteen taxa in the Australian records also appear in our threatened-species list.
-      </p>
-      <div id="vis-translocations" class="chart-slot"></div>
+    <!-- SECTION 02 -->
+    <section class="story-section" id="zoo-conservation">
+      <p class="section-number">02 / BEYOND THE ENCLOSURE</p>
+      <h2>From zoo care to conservation action</h2>
+      <p class="section-intro">Zoos can contribute to conservation through breeding and animal releases. Published translocation studies provide examples of how zoo-sourced animals have been involved in wildlife recovery efforts.</p>
+
+      <div class="chart-grid">
+        <article class="chart-card">
+          <div class="chart-heading">
+            <p class="chart-number">FIGURE 04 • ANIMAL GROUP COMPARISON</p>
+            <h3>Which animal groups feature in Australian release studies?</h3>
+            <p>The research dataset contains international studies. This chart includes only records concerning Australia.</p>
+          </div>
+          <div id="vis-translocations" class="chart-slot"></div>
+          <div class="chart-insight">
+            <span class="insight-label">KEY FINDING</span>
+            <div>
+              <strong>Mammals lead the Australian release-study sample</strong>
+              <p>Of the 27 Australian study records, 13 concern mammals, seven herpetofauna, six birds and one fish record.</p>
+            </div>
+          </div>
+          <p class="chart-note">The chart counts study records rather than unique conservation projects or individual animals.</p>
+        </article>
+
+        <article class="chart-card">
+          <div class="chart-heading">
+            <p class="chart-number">FIGURE 05 • RELEASE OUTCOMES</p>
+            <h3>What happened after release?</h3>
+            <p>Researchers reported successful, unsuccessful, undetermined or unreported outcomes.</p>
+          </div>
+          <div id="vis-outcomes" class="chart-slot"></div>
+          <div class="chart-insight">
+            <span class="insight-label">KEY FINDING</span>
+            <div>
+              <strong>Outcome uncertainty is a central finding</strong>
+              <p>Among 27 Australian records, 15 are classified Undetermined, nine Success, two Failure, and one has no reported outcome. An undetermined result is not a failure.</p>
+            </div>
+          </div>
+          <p class="chart-note">An unreported or undetermined outcome does not indicate that a conservation program failed.</p>
+        </article>
+      </div>
     </section>
 
-    <section class="story-section">
-      <p class="section-number">03 · After release</p>
-      <h2>What did the studies report?</h2>
-      <p>
-        Among the 16 Australian study records that match the threatened species list, authors
-        coded 6 outcomes as success, 2 as failure and 8 as undetermined.
-        These are reported study outcomes, not a measure of zoo wide success.
-      </p>
-      <div id="vis-outcomes" class="chart-slot"></div>
+    <!-- SECTION 03 -->
+    <section class="story-section" id="funding">
+      <p class="section-number">03 / INVESTING IN RECOVERY</p>
+      <h2>Conservation requires more than animal care</h2>
+      <p class="section-intro">Australian recovery grants document targeted conservation investment. At a global scale, published zoo-associated release studies provide another view of conservation activity and where it has been researched.</p>
+
+      <article class="chart-card">
+        <div class="chart-heading">
+          <p class="chart-number">FIGURE 06 • FUNDING COMPARISON</p>
+          <h3>Where was conservation funding allocated?</h3>
+          <p>Compare the funding received by organisations under the 2020 wildlife recovery grants.</p>
+        </div>
+        <div id="vis-grants" class="chart-slot"></div>
+        <div class="chart-insight">
+          <span class="insight-label">KEY FINDING</span>
+          <div>
+            <strong>Funding is concentrated in New South Wales</strong>
+            <p>Across the state-assigned 2020 grants, NSW has A$5.40 million over 10 records, compared with A$1.95 million in Victoria, A$1.00 million in Queensland and A$998,100 in South Australia.</p>
+          </div>
+        </div>
+        <p class="chart-note">These are grant allocations, not evidence of completed projects or measured conservation success.</p>
+      </article>
+
+      <!-- FIGURE 07: WORLD NON-CONTIGUOUS CARTOGRAM -->
+      <article class="chart-card">
+        <div class="chart-heading">
+          <p class="chart-number">FIGURE 07 • NON-CONTIGUOUS CARTOGRAM</p>
+          <h3>Where have zoo-associated animal releases been studied worldwide?</h3>
+          <p>Countries retain their outlines but are resized so that their displayed areas represent the number of published zoo-associated release study records. Colour shows the proportion reporting a successful outcome. Hover over any highlighted country for exact figures.</p>
+        </div>
+        <div id="vis-grant-map" class="chart-slot"></div>
+        <div class="chart-insight">
+          <span class="insight-label">KEY FINDING</span>
+          <div>
+            <strong>The study geography is uneven</strong>
+            <p>The United States appears in 35 research records and Australia in 27; the United Kingdom follows with nine and New Zealand with seven. Country size encodes publications, not animals.</p>
+          </div>
+        </div>
+        <p class="chart-note">Source: global zoo-associated translocation research dataset (117 study records). The country shapes show publication records, not animals released, zoo locations or conservation effectiveness. One record labelled “Congo + Gabon” is not assigned to either country; the Hong Kong (China) record is aggregated with China. Countries without data remain in the faint reference map. Country positions are approximate, and resized outlines may overlap.</p>
+      </article>
     </section>
 
-    <section class="story-section sources">
-      <p class="section-number">04 · About this evidence</p>
-      <h2>Sources and limits</h2>
-      <p>
-<p>
-  The threatened-species list is from
-  <a href="https://data.gov.au/data/dataset/threatened-species-state-lists" target="_blank" rel="noopener">data.gov.au</a>.
-  The translocation records are supplementary data for Blais et al. (2026),
-  <a href="https://doi.org/10.1111/acv.70011" target="_blank" rel="noopener">“Reach and Effectiveness of Conservation Translocations When Founder Animals Are Sourced From Zoos”</a>.
-</p>
-<p>
-  The translocation file summarises published study records; it is not a complete list of current Australian zoo programs. Some outcomes are undetermined, and records may describe repeated studies of a program.
-</p>
-      </p>
+    <!-- SECTION 04 -->
+    <section class="story-section" id="state-overlap">
+      <p class="section-number">04 / ACROSS STATE BOUNDARIES</p>
+      <h2>Threatened wildlife crosses borders</h2>
+      <p class="section-intro">Wildlife does not follow administrative boundaries. The same threatened taxon may be recorded in several Australian states and territories. Examining these overlaps reveals patterns that individual state totals cannot show.</p>
+
+      <article class="chart-card">
+        <div class="chart-heading">
+          <p class="chart-number">FIGURE 08 • UPSET PLOT</p>
+          <h3>Which state combinations appear most often in threatened-taxa records?</h3>
+          <p>This UpSet plot highlights the 12 most frequent exact state-occurrence combinations. Each column represents one combination: connected dots identify its states, while the bar above shows how many listed taxa occur in exactly that combination.</p>
+        </div>
+        <div id="vis-upset" class="chart-slot"></div>
+        <div class="chart-insight">
+          <span class="insight-label">KEY FINDING</span>
+          <div>
+            <strong>Multiple-state occurrences matter</strong>
+            <p>A taxon can have a Yes flag in more than one jurisdiction. Each UpSet column therefore counts taxa in one exact state combination, rather than simply adding state totals.</p>
+          </div>
+        </div>
+        <div class="upset-legend">
+          <span class="upset-legend-title">HOW TO READ THIS CHART</span>
+          <div class="upset-legend-items">
+            <span class="upset-legend-item"><span class="upset-legend-bar"></span>Bar height = listed taxa</span>
+            <span class="upset-legend-item"><span class="upset-legend-dot active"></span>State included</span>
+            <span class="upset-legend-item"><span class="upset-legend-dot inactive"></span>State not included</span>
+            <span class="upset-legend-item"><span class="upset-legend-line"></span>Connected states form a combination</span>
+          </div>
+        </div>
+        <p class="chart-note">Source: Australian Government threatened-species records. The chart shows exact state-occurrence combinations among recorded jurisdictions, not migration paths. Taxa with no recorded jurisdiction are excluded.</p>
+      </article>
+    </section>
+
+    <!-- SECTION 05 -->
+    <section class="story-section" id="research-and-distribution">
+      <p class="section-number">05 / RESEARCH AND DISTRIBUTION</p>
+      <h2>What the evidence can — and cannot — tell us</h2>
+      <p class="section-intro">Published research documents what happened in studied zoo-associated releases. Threatened-species lists identify states of recorded occurrence. These are different types of evidence and should not be confused.</p>
+
+      <article class="chart-card">
+        <div class="chart-heading">
+          <p class="chart-number">FIGURE 09 • SANKEY DIAGRAM</p>
+          <h3>How do reported outcomes differ by animal group?</h3>
+          <p>Flows connect animal groups to outcomes reported in Australian zoo-sourced release study records. Wider ribbons represent more study records, not larger numbers of released animals.</p>
+        </div>
+        <div id="vis-sankey" class="chart-slot"></div>
+        <div class="chart-insight">
+          <span class="insight-label">KEY FINDING</span>
+          <div>
+            <strong>Published records do not always establish success</strong>
+            <p>Of the 27 Australian study records, 15 have Undetermined outcomes. The Sankey connects animal groups with reported research outcomes, not numbers of released animals.</p>
+          </div>
+        </div>
+        <p class="chart-note">Source: Blais and colleagues, supplementary translocation data. Counts describe study records. Undetermined and unreported outcomes are not equivalent to failures. Hover over a ribbon for its count.</p>
+      </article>
+
+      <article class="chart-card">
+        <div class="chart-heading">
+          <p class="chart-number">FIGURE 10 • DOT-DENSITY MAP</p>
+          <h3>How widely are threatened taxa recorded?</h3>
+          <p>Each terracotta dot represents approximately 10 nationally listed taxa recorded in a state or territory. Dots are distributed inside state boundaries for visual comparison.</p>
+        </div>
+        <div id="vis-dot-density" class="chart-slot"></div>
+        <div class="chart-insight">
+          <span class="insight-label">KEY FINDING</span>
+          <div>
+            <strong>Dots are a comparison device—not sightings</strong>
+            <p>NSW has 287 state-occurrence records and Queensland has 265. Each synthetic dot represents approximately 10 occurrences within its state.</p>
+          </div>
+        </div>
+        <div class="dot-map-key">
+          <span class="dot-map-key-symbol"></span>
+          <span>1 dot ≈ 10 threatened-taxa state-occurrence records</span>
+        </div>
+        <p class="chart-note">One dot ≈ 10 state-occurrence records, rounded to the nearest dot. Dot positions are illustrative, not actual species locations or population distributions. The same taxon can appear in multiple states.</p>
+      </article>
+    </section>
+
+    <!-- SECTION 06 -->
+    <section class="story-section" id="risk-profile">
+      <p class="section-number">06 / THE EXTINCTION RISK PROFILE</p>
+      <h2>Understanding the scale of extinction risk</h2>
+      <p class="section-intro">Beyond where listed taxa occur, the national records reveal which animal classes contain the largest number of critically endangered taxa and how the overall list is divided by conservation status.</p>
+
+      <article class="chart-card">
+        <div class="chart-heading">
+          <p class="chart-number">FIGURE 11 • LOLLIPOP CHART</p>
+          <h3>Which animal classes contain the most critically endangered taxa?</h3>
+          <p>Rank the eight animal classes with the highest counts of nationally listed critically endangered taxa. Hover to compare each class's total listings and its critically endangered share.</p>
+        </div>
+        <div id="vis-lollipop" class="chart-slot"></div>
+        <div class="chart-insight">
+          <span class="insight-label">KEY FINDING</span>
+          <div>
+            <strong>Reptiles lead the critically endangered count</strong>
+            <p>Reptilia has 27 Critically Endangered listed taxa and Actinopterygii (ray-finned fishes) has 26. The chart compares counts, not extinction probabilities.</p>
+          </div>
+        </div>
+        <p class="chart-note">Counts are of listed taxa classified as Critically Endangered, not individual animals. The chart ranks absolute counts, not the proportion at risk within each class.</p>
+      </article>
+
+      <article class="chart-card">
+        <div class="chart-heading">
+          <p class="chart-number">FIGURE 12 • WAFFLE CHART</p>
+          <h3>How is the national threatened-taxa list divided by status?</h3>
+          <p>Each square represents approximately 1% of the 700 listed taxa. Colours distinguish the six status categories; hover to see exact counts and percentages.</p>
+        </div>
+        <div id="vis-waffle" class="chart-slot"></div>
+        <div class="chart-insight">
+          <span class="insight-label">KEY FINDING</span>
+          <div>
+            <strong>More than two-thirds are Endangered or Vulnerable</strong>
+            <p>Endangered (255) and Vulnerable (221) together account for 476 of 700 listed taxa—68% of the dataset. Each waffle cell represents about 1% of the list.</p>
+          </div>
+        </div>
+        <p class="chart-note">The 100 squares are rounded using the largest-remainder method. Very small categories may round to zero squares. Source: Australian Government threatened-species records, extracted 28 August 2026.</p>
+      </article>
+    </section>
+
+    <!-- SECTION 07 -->
+    <section class="story-section methodology" id="sources">
+      <p class="section-number">07 / SOURCES AND METHODOLOGY</p>
+      <h2>Understanding the evidence</h2>
+      <p>This visualisation brings together three published sources covering threatened taxa, zoo-sourced translocation research and government wildlife recovery grants. They measure different phenomena and should not be treated as equivalent observations.</p>
+
+      <h3>Data sources</h3>
+      <p><strong>Australian threatened animals:</strong> Australian Government threatened-species records. <a href="https://data.gov.au/data/dataset/threatened-species-state-lists" target="_blank" rel="noopener noreferrer">Data.gov.au</a></p>
+      <p><strong>Zoo-associated conservation translocations:</strong> Blais and colleagues, supplementary research data. <a href="https://doi.org/10.1111/acv.70011" target="_blank" rel="noopener noreferrer">Research publication</a></p>
+      <p><strong>Wildlife rescue and captive-breeding grants:</strong> Australian Government bushfire recovery funding. <a href="https://www.dcceew.gov.au/environment/biodiversity/bushfire-recovery/activities-and-outcomes/phase-1" target="_blank" rel="noopener noreferrer">Government funding source</a></p>
+
+      <h3>Important limitations</h3>
+      <p>Threatened-animal records concern listed taxa, not individual animals or population abundance. State occurrences overlap because the same taxon may be recorded in multiple jurisdictions.</p>
+      <p>Published translocation studies do not form a complete census of all zoo programs. Grant funding relates to 2020 and includes organisations other than zoos.</p>
+      <p>The non-contiguous cartogram encodes published study counts with country area, rather than mapping actual animal movements. The dot-density map uses synthetic within-state positions and does not locate actual animals. Sankey widths encode study records rather than animals released.</p>
     </section>
   </main>
 
   <footer>
-    <p>Created by Mahnoor · FIT3179 Data Visualisation 2 · 2026</p>
+    <p>BEYOND THE EXHIBIT</p>
+    <p>FIT3179 Data Visualisation 2 • Mahnoor Humayun (35533218) • 2026</p>
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/vega@6.4.0"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@6.5.0"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@7.3.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>

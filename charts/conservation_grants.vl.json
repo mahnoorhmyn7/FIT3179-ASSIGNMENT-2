@@ -1,0 +1,80 @@
+
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Recipient-level allocations from the Australian Government's 2020 wildlife rescue, rehabilitation and captive-breeding grants.",
+  "width": "760",
+  "height": 570,
+  "data": {
+    "url": "data/conservation_grants_2020.csv",
+    "format": {
+      "type": "csv"
+    }
+  },
+  "transform": [
+    {
+      "calculate": "toNumber(datum.grant_funding_aud)",
+      "as": "funding"
+    },
+    {
+      "aggregate": [
+        {
+          "op": "sum",
+          "field": "funding",
+          "as": "total_funding"
+        }
+      ],
+      "groupby": ["recipient"]
+    }
+  ],
+  "mark": {
+    "type": "bar",
+    "color": "#bd6848",
+    "cornerRadiusEnd": 3
+  },
+  "encoding": {
+    "x": {
+      "field": "total_funding",
+      "type": "quantitative",
+      "title": "Government funding (AUD)",
+      "scale": {
+        "zero": true
+      },
+      "axis": {
+        "format": "~s",
+        "gridColor": "#e8ece6"
+      }
+    },
+    "y": {
+      "field": "recipient",
+      "type": "nominal",
+      "title": null,
+      "sort": "-x",
+      "axis": {
+        "title": null,
+        "labelFontSize": 12,
+        "labelLimit": 300,
+        "labelPadding": 8
+      }
+    },
+    "tooltip": [
+      {
+        "field": "recipient",
+        "type": "nominal",
+        "title": "Organisation"
+      },
+      {
+        "field": "total_funding",
+        "type": "quantitative",
+        "title": "Grant funding (AUD)",
+        "format": ",.0f"
+      }
+    ]
+  },
+  "config": {
+    "background": "#fffefa",
+    "view": {
+      "stroke": null
+    },
+    "font": "Arial"
+  }
+}

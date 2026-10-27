@@ -1,0 +1,70 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "State and territory occurrence counts for nationally listed Australian threatened animal taxa.",
+  "width": "760",
+  "height": 700,
+  "autosize": {
+    "type": "fit",
+    "contains": "padding",
+    "resize": true
+  },
+  "data": {
+    "values": []
+  },
+  "projection": {
+    "type": "conicEqualArea",
+    "parallels": [-18, -36],
+    "rotate": [-134, 0, 0]
+  },
+  "mark": {
+    "type": "geoshape",
+    "stroke": "#fffefa",
+    "strokeWidth": 1.4
+  },
+  "encoding": {
+    "color": {
+      "field": "properties.listed_taxa",
+      "type": "quantitative",
+      "title": "Listed threatened taxa",
+      "scale": {
+        "range": [
+          "#e2eee3",
+          "#9fbea6",
+          "#5b896d",
+          "#183a30"
+        ]
+      },
+      "legend": {
+        "orient": "bottom",
+        "direction": "horizontal",
+        "gradientLength": 280,
+        "gradientThickness": 14,
+        "titleFontSize": 13,
+        "labelFontSize": 12,
+        "titleColor": "#183a30",
+        "labelColor": "#24332d",
+        "format": "d"
+      }
+    },
+    "tooltip": [
+      {
+        "field": "properties.state_name",
+        "type": "nominal",
+        "title": "State or territory"
+      },
+      {
+        "field": "properties.listed_taxa",
+        "type": "quantitative",
+        "title": "Listed taxa",
+        "format": ",d"
+      }
+    ]
+  },
+  "config": {
+    "background": "#fffefa",
+    "view": {
+      "stroke": null
+    },
+    "font": "Arial"
+  }
+}
